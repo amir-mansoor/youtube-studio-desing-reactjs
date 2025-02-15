@@ -1,9 +1,20 @@
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
 
 function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <div>
-      <Header />
+    <div className="flex">
+      {/* Sidebar */}
+      <Sidebar isOpen={sidebarOpen} />
+
+      <div className="flex-1">
+        {/* Header */}
+        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      </div>
     </div>
   );
 }

@@ -1,23 +1,20 @@
-import React, { useState } from "react";
 import Logo from "../assets/logo.png";
 import { CircleHelp, Menu, Plus, Search } from "lucide-react";
-import Sidebar from "./Sidebar"; // Import Sidebar Component
+import { Outlet } from "react-router-dom";
 
-const Header = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
+const Header = ({ sidebarOpen, setSidebarOpen }) => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex  flex-col h-screen">
       {/* Fixed Header */}
-      <div className="px-4 py-2 shadow-md  w-full fixed top-0 z-50">
+      <div className="px-4 py-2 shadow-md  w-full fixed top-0 z-50 bg-gray">
         <div className="flex items-center justify-between">
           {/* Left Section (Logo + Menu) */}
           <div className="flex space-x-5 items-center">
             <button
-              className="p-2 hover:backdrop-brightness-125 rounded-full"
+              className="p-2 hover:backdrop-brightness-125 rounded-full cursor-pointer"
               onClick={() => setSidebarOpen(!sidebarOpen)} // Toggle Sidebar
             >
-              <Menu size={25} className="text-white" />
+              <Menu size={25} className="text-white " />
             </button>
             <h1 className="font-extrabold text-xl text-white">YoutubeStudio</h1>
           </div>
@@ -35,8 +32,8 @@ const Header = () => {
 
           {/* Right Section */}
           <div className="flex items-center space-x-3">
-            <CircleHelp />
-            <button className="flex items-center border px-3 py-1 text-center rounded-full hover:backdrop-brightness-125">
+            <CircleHelp className="cursor-pointer" />
+            <button className="flex items-center border px-3 py-1 cursor-pointer  rounded-full hover:backdrop-brightness-125">
               <Plus /> Create
             </button>
             <img
@@ -48,16 +45,13 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Fixed Sidebar Below Header */}
-      <Sidebar isOpen={sidebarOpen} />
-
       {/* Main Content */}
       <div
         className={`p-6 text-white mt-[60px] transition-all ${
           sidebarOpen ? "ml-56" : "ml-16"
         }`}
       >
-        Main Content Here
+        <Outlet />
       </div>
     </div>
   );
